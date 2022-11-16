@@ -1,6 +1,5 @@
 const express = require("express")
-const {verifyUser,verifyAdmin} = require("../utils/jwt.js")
-
+const verifyToken = require("../utils/jwt")
 const {
     updateUser,
     deleteUser,
@@ -10,13 +9,16 @@ const {
 
 const router = express.Router()
 
+//user routes
 //update
-router.put("/:id",verifyUser,updateUser)
+router.put("/:id",verifyToken,updateUser)
 //delete
-router.delete("/:id",verifyUser,deleteUser)
+router.delete("/:id",verifyToken,deleteUser)
 //get
-router.get("/:id",verifyUser,getUser)
+router.get("/:id",verifyToken,getUser)
+
+//admin routes
 //getall
-router.get("/",verifyAdmin,getAllUser)
+router.get("/",verifyToken,getAllUser)
 
 module.exports = router
